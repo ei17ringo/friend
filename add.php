@@ -3,7 +3,7 @@
 		$area_id = $_GET['id'];
 
 
-		//接続オブジェクトを作成する
+		//接続オブジェクト
 		$dsn = 'mysql:dbname=CampTest;host=localhost';
 		$user = 'root';
 		$password = 'camp2014';
