@@ -3,7 +3,7 @@
 		$friend_id = $_GET['friend_id'];
 
 
-		//接続オブジェクトを作成する
+		//接続オブジェクト
 		$dsn = 'mysql:dbname=CampTest;host=localhost';
 		$user = 'root';
 		$password = 'camp2014';
