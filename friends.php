@@ -33,19 +33,64 @@
 		//配列の初期設定
 		//$friends =  array();
 
+		//男性、女性の数を格納する変数の初期化
+		$gender_m_count = 0;
+		$gender_f_count = 0;
+
 		$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		
 		$friends[] = $rec;
+
+		// switch ($rec['gender']) {
+		// 	case '男':
+		// 		$gender_m_count++;
+		// 		break;
+		// 	case '女':
+		// 		$gender_f_count++;
+		// 		break;
+			
+		// 	default:
+		// 		break;
+		// }
+
+		$gender_m_count = count_gender($rec['gender'],'男',$gender_m_count);
+		$gender_f_count = count_gender($rec['gender'],'女',$gender_f_count);
+
 
 		while($rec){
 			$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			
 			$friends[] = $rec;
+
+			$gender_m_count = count_gender($rec['gender'],'男',$gender_m_count);
+			$gender_f_count = count_gender($rec['gender'],'女',$gender_f_count);
+
+			// switch ($rec['gender']) {
+			// case '男':
+			// 	$gender_m_count++;
+			// 	break;
+			// case '女':
+			// 	$gender_f_count++;
+			// 	break;
+			
+			// default:
+			// 	break;
+			// }
+
 		}
 
 		$dsn = null;
+
+
+	function count_gender($gender,$gender_type,$gender_count){
+		if ($gender == $gender_type){
+			return $gender_count++;
+		}
+		return 	$gender_count;
+	}
+
 	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -55,7 +100,7 @@
 </head>
 <body>
 	<h4><?php echo $area_name.'フレンズ'; ?></h4>
-
+	<h5><?php echo '男性：'.$gender_m_count.'人　女性：'.$gender_f_count.'人'; ?></h5>
 	<?php if ($return == 1) {
 
 		echo '友達が一人追加されました。<br />';

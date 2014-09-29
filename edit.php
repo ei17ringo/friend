@@ -61,7 +61,22 @@
 		 	if (!is_numeric($age)){
 		 		//数値ではない時
 		 		echo '年齢は数値を入れて下さい';
+		 	}else{
+
+		 		$sql = 'UPDATE `friend_table` SET `name` = \''.$name.'\',`gender` = \''.$gender;
+		 		$sql .= '\',`age` = '.$age.',`area_table_id` = '.$area_table_id;
+		 		$sql .= ' WHERE `id`='.$friend_id;
+
+		 		//var_dump($sql);
+		 		$stmt = $dbh->prepare($sql);
+		 		$stmt->execute();
+
+				$dsn = null;
+				header('location:friends.php?id='.$area_table_id.'&return=1');
+				exit();
 		 	}
+
+
 
 		// 	$sql = 'INSERT INTO `friend_table` (area_table_id,name,age,gender)';
 		// 	$sql .= 'values("'.$area_table_id.'","'.$name.'","'.$age.'","'.$gender.'");';
